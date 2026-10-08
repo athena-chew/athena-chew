@@ -1,7 +1,6 @@
 Athena Chew
 Current Address: Honolulu, Hawaii 
-Permanent Address: Fremont, California 
-   Cell: (510) 458-3764   |   E-mail: athena97@hawaii.edu
+E-mail: athena97@hawaii.edu
 
 PROFESSIONAL SUMMARY:	
 Business Administration student at the University of Hawaii at Manoa pursuing a degree in Management and International Business, with hands-on experience in guest operations, customer-facing coordination, and community program management. Brings strong interpersonal skills, conversational Mandarin, and a track record of reliability across fast-paced operational environments.
