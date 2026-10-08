@@ -5,3 +5,6 @@ I am passionate about leadership and community involvement. I co-founded a nonpr
 Outside of my professional interests, I enjoy going to the beach, shopping, exploring new places, reading, and watching TV shows and movies—especially *Once Upon a Time*.
 
 --> Drafted with help from ChatGPT (OpenAI, 2026); reviewed and edited by me
+
+#Engagements
+[Resume](RESUME.md)
