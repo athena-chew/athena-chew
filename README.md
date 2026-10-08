@@ -6,6 +6,6 @@ Outside of my professional interests, I enjoy going to the beach, shopping, expl
 
 --> Drafted with help from ChatGPT (OpenAI, 2026); reviewed and edited by me
 
-#Engagements
+# Engagements
 
 [Resume](RESUME.md)
