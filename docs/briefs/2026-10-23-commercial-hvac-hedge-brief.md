@@ -58,5 +58,3 @@ Federal Reserve. (n.d.). *Selected interest rates (H.15).* https://www.federalre
 Stauffer, A. (n.d.). *FX hedging project: Stage 1 — Executive brief.* https://adamwstauffer.github.io/ai-lms/fx-hedging-stage1.html
 
 Stauffer, A. (n.d.). *Decision memo template.* https://github.com/adamwstauffer/shidler/blob/main/courses/International-Finance-And-Securities/projects/fx-hedging/_templates/template-decision-memo.md
-
-Scenario details and indicative rates were provided in the instructor's Scenario 13 assignment email.
