@@ -34,18 +34,18 @@ BRAND FORMATTING — applied per docs/_branding/design.json (v1.0.0)
   Full brand standard: docs/_branding/design.json · Source: https://manoa.hawaii.edu/brand/
 -->
 
-# [COMPANY NAME] — FX Transaction Hedge Model · Technical Specification
+# Commercial-HVAC — FX Transaction Hedge Model · Technical Specification
 
 > <span style="color:#024731; font-weight:700;">Technical specification</span> for the FX transaction hedge model — the named-range contract, calculation flow, and validation checks, precise enough that an AI or a colleague could build (or rebuild) the workbook from this document alone. This spec is the input the AI-assisted build works from.
 
 | Field | Value |
 |------|------|
-| **Created by** | [name] |
-| **Updated by** | [name] |
-| **Date Created** | [YYYY-MM-DD] |
-| **Date Updated** | [YYYY-MM-DD] |
-| **Version** | [0.0] |
-| **LLM Used** (optional) | [LLM name and how it was used] |
+| **Created by** | Athena Chew |
+| **Updated by** | Athena Chew |
+| **Date Created** | 2026-11-05 |
+| **Date Updated** | 2026-11-05 |
+| **Version** | [1.0] |
+| **LLM Used** | ChatGPT GPT-6 - To edit draft of specifications and check for errors and any missing information |
 | **Role** | Treasury Analyst / FP&A Analyst |
 | **Audience** | CFO / Director of Treasury |
 | **Companion Workbook** | student build |
@@ -54,19 +54,7 @@ BRAND FORMATTING — applied per docs/_branding/design.json (v1.0.0)
 
 ## 1. Problem Statement
 
-Briefly restate the exposure, timing, and objective in professional terms (3–5 sentences).
-
-<details>
-<summary><span style="color:#024731; font-weight:600;">Example phrasing (Receivable)</span></summary>
-
-> [Company] expects a [FC amount] receivable denominated in [EUR/GBP/JPY] settling in [T] days. A [depreciation/appreciation] in [currency pair] over that horizon would reduce realized USD proceeds and compress [gross margin / earnings / cash-flow coverage]. This specification documents the analytical framework used to quantify and compare four strategies — **no hedge**, **forward hedge**, **money-market hedge**, and **option (put) hedge** — and to produce the sensitivity evidence that supports the Stage 5 decision memo.
-</details>
-
-**Include:**
-- Exposure type (receivable or payable) and functional currency
-- Foreign-currency amount, quote convention (USD per FC), settlement date
-- Objective (protect USD value, preserve upside, minimize premium cost, etc.)
-- Decision context (corporate treasury, business unit, board-approved policy)
+Commercial-HVAC expects a 3,400,000 receivable denominated in EUR settling in 273 days (9 months). A depreciation in EUR to USD (EURUSD) over that horizon would reduce realized USD proceeds and compress gross margin, potentially losing upside on the conversion and at worse losing the USD value compared to converting today. This specification documents the analytical framework used to quantify and compare four strategies — **no hedge**, **forward hedge**, **money-market hedge**, and **option (put) hedge** — and to produce the sensitivity evidence that supports the Stage 5 decision memo.
 
 ---
 
@@ -78,19 +66,19 @@ All inputs should be exposed as workbook **named ranges** so Calculation Flow (�
 
 | Standardized Name | Description | Unit | Example |
 |-------------------|-------------|------|--------:|
-| `FC_AMT` | Foreign-currency notional (receivable or payable) | FC | 10,000,000 GBP |
-| `S0_in` | Spot exchange rate at inception | USD per FC | 1.4600 |
-| `F0_in` | Forward rate to settlement | USD per FC | 1.4400 |
-| `R_USD` | USD interest rate to settlement | Annual % | 6.00% |
-| `R_FC` | Foreign-currency interest rate to settlement | Annual % | 6.50% |
-| `T_DAYS` | Days to settlement | Days | 365 |
+| `FC_AMT` | Foreign-currency notional (receivable or payable) | FC | 3,400,000 |
+| `S0_in` | Spot exchange rate at inception | USD per FC | 1.1219 (indicative, replaced with live market data at Stage 4.)|
+| `F0_in` | Forward rate to settlement | USD per FC | 1.1756 (indicative, replaced with live market data at Stage 4.) |
+| `R_USD` | USD interest rate to settlement | Annual % | 3.88% (indicative, replaced with live market data at Stage 4.)|
+| `R_FC` | Foreign-currency interest rate to settlement | Annual % | 2.65% (indicative, replaced with live market data at Stage 4.)|
+| `T_DAYS` | Days to settlement | Days | 273 |
 | `BASIS` | Day-count denominator (single-value simplification) | Days | 360 (USD, EUR) / 365 (GBP) |
 | `BASIS_USD` *(optional, rigorous variant)* | USD-leg day-count denominator | Days | 360 |
 | `BASIS_FC` *(optional, rigorous variant)* | FC-leg day-count denominator | Days | 360 (EUR) / 365 (GBP) |
-| `K_PUT` | Put option strike (receivables) | USD per FC | 1.4600 |
-| `K_CALL` | Call option strike (payables) | USD per FC | 1.8000 |
-| `PREM_PUT` | Put premium, USD per 1 FC | USD | 0.015 |
-| `PREM_CALL` | Call premium, USD per 1 FC | USD | 0.010 |
+| `K_PUT` | Put option strike (receivables) | USD per FC | 0.023 - (Strikes near spot, indicated in PREM_PUT, replaced with live market data at Stage 4.)) |
+| `K_CALL` | Call option strike (payables) | USD per FC | 0.038 - (Strikes near spot, indicated in PREM_CALL, replaced with live market data at Stage 4.)) |
+| `PREM_PUT` | Put premium, USD per 1 FC | USD | 0.0224 |
+| `PREM_CALL` | Call premium, USD per 1 FC | USD | 0.0376 |
 
 ### 2.2 Derived / Intermediate Values
 
@@ -101,16 +89,13 @@ All inputs should be exposed as workbook **named ranges** so Calculation Flow (�
 | `S_T_grid` | Sensitivity spot grid at settlement | Built from `S0_in` ± 5% in 1% steps |
 | `USD_NO_HEDGE` | USD proceeds / outlay under no hedge | `S_T × FC_AMT` |
 
-> <span style="color:#024731;">**Tip:**</span> Keep labels short and standardized — these names become Excel named ranges *and* the AI prompt parameters in Stage 3.
-
 ---
 
 ## 3. Assumptions & Constraints
 
 State every convention used. Clarity here is what makes the model reproducible.
 
-- **Quote convention:** All rates expressed as **USD per unit of foreign currency** (e.g., USD/GBP, USD/EUR). A higher quote means FC appreciation.
-- **Horizon:** Single-maturity model; `T_DAYS = 365` unless otherwise noted. Templates assume a 1-year tenor.
+- **Quote convention:** All rates expressed as **USD per unit of foreign currency, USD/EUR**. A higher quote means FC appreciation.
 - **Day-count basis:** The default 1-year tenor uses the textbook simplified-annual form `(1 + r)` for both USD and FC legs. The general form is `r × T_DAYS / BASIS`, with `BASIS = 360` for USD and EUR money-market quotes (ACT/360) and `BASIS = 365` for GBP money-market quotes (ACT/365). The template exposes a **single `BASIS`** named range (simplification). A rigorous build should split it into `BASIS_USD` and `BASIS_FC` so each leg applies its own convention. Record it in §6.2.
 - **Parity:** Money-market hedge is assumed to replicate the forward hedge under covered interest-rate parity; any gap is a test of parity, not a model error.
 - **Option premium:** Paid upfront in USD, quoted per 1 unit of FC (no contract multiplier). Premia are expressed as a **negative cash flow** at t₀ and carried forward at `R_USD` to put them on the same footing as the settlement-date USD proceeds.
@@ -118,6 +103,14 @@ State every convention used. Clarity here is what makes the model reproducible.
 - **Transaction costs & bid-ask spreads:** Excluded from the base case. Flagged as a sensitivity candidate in §6.
 - **Tax / accounting treatment:** Excluded. Model reports pre-tax cash outcomes only.
 - **Scenario construction:** Future spot `S_T` is varied deterministically across a grid; no probability weights and no implied-volatility distribution are applied.
+
+**Notes:**
+Sources Used:
+https://www.investing.com/economic-calendar/interest-rate-decision-164
+https://www.federalreserve.gov/releases/h15/
+https://www.investing.com/currencies/eur-usd-historical-data
+
+Sources used for initial specification and model build. Will be replaced with live market data at Stage 4. Sources pulled as of market close, November 5, 2026
 
 ---
 
@@ -144,7 +137,7 @@ Described in named-range pseudocode so the logic is portable across Excel, Pytho
 3. Invest the USD to maturity: `USD_MM` = `(FC_AMT / DF_FC) × S0_in × DF_USD`.
 4. At maturity, the FC receivable repays the foreign borrowing exactly — so the USD deposit is the locked-in proceed.
 
-> **Parity check:** `USD_MM ≈ USD_FWD` within rounding. A persistent gap indicates a violation of covered interest-rate parity in the quoted inputs.
+> **Parity check:** `USD_MM ≈ USD_FWD` within rounding (0.05%). A persistent gap indicates a violation of covered interest-rate parity in the quoted inputs.
 
 ### Step 4 — Option hedge (floor with upside)
 
