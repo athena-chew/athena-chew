@@ -1,10 +1,11 @@
-| type | brief |
-|---|---|
-| title | Commercial HVAC FX Hedging Executive Brief |
-| scenario | 13 — commercial-hvac |
-| date | 2026-10-23 |
-| hypothesis | I expect the forward hedge to provide the most predictable USD proceeds because it locks in the exchange rate, while the EUR put preserves upside potential at a premium cost. |
-| llm_used | ChatGPT (GPT-6) |
+---
+type: brief
+title: Commercial HVAC FX Hedging Executive Brief
+scenario: 13 — commercial-hvac
+date: 2026-10-23
+hypothesis: I expect the forward hedge to provide the most predictable USD proceeds because it locks in the exchange rate, while the EUR put preserves upside potential at a premium cost.
+llm_used: ChatGPT (GPT-6)
+---
 
 # Commercial HVAC FX Hedging Executive Brief
 
