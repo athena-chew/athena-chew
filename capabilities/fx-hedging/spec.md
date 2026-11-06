@@ -276,5 +276,5 @@ Record candidly what the model gets right and where it needs work. If you are wr
 
 | Version | Date | Author | Change |
 |---------|------|--------|--------|
-| 0.1 | [YYYY-MM-DD] | [name] | Initial draft |
-|  |  |  |  |
+| 0.1 | 2026-11-05 | Athena Chew | Initial draft, based on https://github.com/adamwstauffer/shidler/blob/main/courses/International-Finance-And-Securities/projects/fx-hedging/_templates/template-spec.md |
+
