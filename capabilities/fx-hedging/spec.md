@@ -54,7 +54,7 @@ BRAND FORMATTING — applied per docs/_branding/design.json (v1.0.0)
 
 ## 1. Problem Statement
 
-Commercial-HVAC expects a 3,400,000 receivable denominated in EUR settling in 273 days (9 months). A depreciation in EUR to USD (EURUSD) over that horizon would reduce realized USD proceeds and compress gross margin, potentially losing upside on the conversion and at worse losing the USD value compared to converting today. This specification documents the analytical framework used to quantify and compare four strategies — **no hedge**, **forward hedge**, **money-market hedge**, and **option (put) hedge** — and to produce the sensitivity evidence that supports the Stage 5 decision memo.
+Commercial-HVAC expects to receive a €3,400,000 receivable in 273 days (approximately nine months). Because the receivable is denominated in euros, a depreciation of the EUR against the USD over the settlement period would reduce the amount of USD received upon conversion, creating foreign exchange risk. This specification establishes a framework to quantify and compare four strategies—no hedge, forward hedge, money-market hedge, and put option hedge—to evaluate their respective cash-flow outcomes, risk exposures, and potential benefits. The resulting sensitivity analysis will support the Stage 5 hedging recommendation to the CFO.
 
 ---
 
@@ -72,11 +72,8 @@ All inputs should be exposed as workbook **named ranges** so Calculation Flow (�
 | `R_USD` | USD interest rate to settlement | Annual % | 3.88% annual, ACT/360 (indicative, replaced with live market data at Stage 4.)|
 | `R_FC` | Foreign-currency interest rate to settlement | Annual % | 2.65% annual, ACT/360 (indicative, replaced with live market data at Stage 4.)|
 | `T_DAYS` | Days to settlement | Days | 273 |
-| `BASIS` | Day-count denominator (single-value simplification) | Days | 360 (USD, EUR) / 365 (GBP) |
-| `BASIS_USD` *(optional, rigorous variant)* | USD-leg day-count denominator | Days | 360 |
-| `BASIS_FC` *(optional, rigorous variant)* | FC-leg day-count denominator | Days | 360 (EUR) / 365 (GBP) |
-| `K_PUT` | Put option strike (receivables) | USD per FC | 0.023 - (Strikes near spot, indicated in PREM_PUT, replaced with live market data at Stage 4.)) |
-| `K_CALL` | Call option strike (payables) | USD per FC | 0.038 - (Strikes near spot, indicated in PREM_CALL, replaced with live market data at Stage 4.)) |
+| `K_PUT` | Put option strike (receivables) | USD per FC | 1.122 - (Strikes near spot, indicated in S0_in, replaced with live market data at Stage 4.)) |
+| `K_CALL` | Call option strike (payables) | USD per FC | 1.22 - (Strikes near spot, indicated in S0_in, replaced with live market data at Stage 4.)) |
 | `PREM_PUT` | Put premium, USD per 1 FC | USD | 0.0224 |
 | `PREM_CALL` | Call premium, USD per 1 FC | USD | 0.0376 |
 
@@ -96,7 +93,6 @@ All inputs should be exposed as workbook **named ranges** so Calculation Flow (�
 State every convention used. Clarity here is what makes the model reproducible.
 
 - **Quote convention:** All rates expressed as **USD per unit of foreign currency, USD/EUR**. A higher quote means FC appreciation.
-- **Day-count basis:** The default 1-year tenor uses the textbook simplified-annual form `(1 + r)` for both USD and FC legs. The general form is `r × T_DAYS / BASIS`, with `BASIS = 360` for USD and EUR money-market quotes (ACT/360) and `BASIS = 365` for GBP money-market quotes (ACT/365). The template exposes a **single `BASIS`** named range (simplification). A rigorous build should split it into `BASIS_USD` and `BASIS_FC` so each leg applies its own convention. Record it in §6.2.
 - **Parity:** Money-market hedge is assumed to replicate the forward hedge under covered interest-rate parity; any gap is a test of parity, not a model error.
 - **Option premium:** Paid upfront in USD, quoted per 1 unit of FC (no contract multiplier). Premia are expressed as a **negative cash flow** at t₀ and carried forward at `R_USD` to put them on the same footing as the settlement-date USD proceeds.
 - **Counterparty / credit risk:** Excluded. All derivatives assumed frictionless and creditworthy.
@@ -218,9 +214,21 @@ Record candidly what the model gets right and where it needs work. If you are wr
 - [ ] Every formula in §4 uses named ranges — no bare `$F$n` references
 - [ ] Money-market hedge ties to forward hedge within 0.05% (parity check)
 - [ ] Put payoff at `S_T = K_PUT` equals `K_PUT × FC_AMT + FV_PREM_PUT` (kink verification)
-- [ ] Sensitivity grid is symmetric around `S_T = S0_in` and driven by `STEP_FRAC`
+- [ ] Sensitivity grid is symmetric around `S_T = S0_in` and driven by from range -5% to +5% (inclusive) at 1% interval.
 - [ ] Notes tab records spot / forward / rate sources with access dates
 - [ ] Cell colors match the legend: <span style="background:#FFFF00;">yellow</span> inputs, <span style="color:#0000FF;">blue</span> assumptions, black formulas, <span style="color:#024731;">green</span> cross-tab links
+
+### 6.4 Validation Checklist
+The completed workbook must pass the following validation checks before its outputs are used for the Stage 5 decision memo.
+
+- Input validation: All ten standardized named ranges must be present, correctly defined, and linked to the appropriate input cells.
+- Forward hedge: USD proceeds must equal FC_AMT × F0_in and remain constant across all sensitivity scenarios.
+- Money-market hedge: The foreign-currency borrowing must equal the present value of the receivable. The loan must be fully repaid by the EUR receivable at maturity.
+- Interest rate parity: Money-market hedge proceeds should approximately equal forward hedge proceeds when the inputs satisfy covered interest rate parity, subject to rounding and consistent market conventions.
+- Option payoff: The put option must establish a minimum exchange-rate conversion value at the strike price, less the premium cost. The option must participate in favorable EUR appreciation above the strike.
+- Sensitivity validation: The sensitivity grid must range from 95% to 105% of S0_in, using 1% increments, with 11 scenarios.
+- Formula integrity: All calculated outputs must use formulas rather than manually entered results. No spreadsheet error values should appear.
+- Output verification: All strategy proceeds, hedge-profit calculations, and scenario winners must reconcile with their respective formulas.
 
 ---
 
@@ -257,6 +265,21 @@ Record candidly what the model gets right and where it needs work. If you are wr
 - **Be reproducible:** another treasury analyst — or an AI — should be able to rebuild the model from this spec alone.
 - **Be reflective:** §6 should show honest assessment of the model's strengths and gaps, not self-congratulation.
 - **Be executive-relevant:** the CFO should understand *what was built* and *why it matters* for the hedging decision.
+
+**Workbook Tab Architecture**
+
+The workbook must contain the following tabs, each with a clearly defined purpose:
+
+| Tab | Purpose |
+|---|---|
+| Cover | Identify the project, company, course, author, and model version. |
+| Legend/Key | Explain cell colors, input conventions, formulas, and workbook navigation. |
+| Inputs | Store all market inputs, assumptions, units, sources, and access dates. |
+| Forward Hedge | Calculate the locked-in USD proceeds using the forward exchange rate. |
+| Money-Market Hedge | Display the foreign-currency borrowing, spot conversion, and USD investment calculations separately. |
+| Option Hedge | Calculate the put option payoff, premium cost, and net USD proceeds. |
+| Sensitivity | Compare all four strategies across the specified future exchange-rate scenarios. |
+| Notes & Assumptions | Document data sources, market-data timestamps, assumptions, limitations, and model conventions.
 
 ---
 
