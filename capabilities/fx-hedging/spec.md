@@ -44,7 +44,7 @@ BRAND FORMATTING â€” applied per docs/_branding/design.json (v1.0.0)
 | **Updated by** | Athena Chew |
 | **Date Created** | 2026-11-05 |
 | **Date Updated** | 2026-11-05 |
-| **Version** | 0.2 |
+| **Version** | 1.0 |
 | **LLM Used** | ChatGPT GPT-6 - To edit draft of specifications and check for errors and any missing information |
 | **Role** | Treasury Analyst / FP&A Analyst |
 | **Audience** | CFO / Director of Treasury |
@@ -73,7 +73,7 @@ All inputs should be exposed as workbook **named ranges** so Calculation Flow (Â
 | `R_FC` | Foreign-currency interest rate to settlement | Annual % | 2.65% annual, ACT/360 (indicative, replaced with live market data at Stage 4.)|
 | `T_DAYS` | Days to settlement | Days | 273 |
 | `K_PUT` | Put option strike (receivables) | USD per FC | 1.122 - (Strikes near spot, indicated in S0_in, replaced with live market data at Stage 4.)) |
-| `K_CALL` | Call option strike (payables) | USD per FC | 1.22 - (Strikes near spot, indicated in S0_in, replaced with live market data at Stage 4.)) |
+| `K_CALL` | Call option strike (payables) | USD per FC | 1.122 - (Strikes near spot, indicated in S0_in, replaced with live market data at Stage 4.)) |
 | `PREM_PUT` | Put premium, USD per 1 FC | USD | 0.0224 |
 | `PREM_CALL` | Call premium, USD per 1 FC | USD | 0.0376 |
 
@@ -300,4 +300,4 @@ The workbook must contain the following tabs, each with a clearly defined purpos
 | Version | Date | Author | Change |
 |---------|------|--------|--------|
 | 0.1 | 2026-11-05 | Athena Chew | Initial draft, based on https://github.com/adamwstauffer/shidler/blob/main/courses/International-Finance-And-Securities/projects/fx-hedging/_templates/template-spec.md |
-| 0.2 | 2026-11-05 | Athena Chew | Revised draft, fed through ChatGPT GPT 6.0 to look for any modeling errors or better way to phrase data |
+| 1.0 | 2026-11-05 | Athena Chew | Revised draft, fed through ChatGPT GPT 6.0 to look for any modeling errors or better way to phrase data |
