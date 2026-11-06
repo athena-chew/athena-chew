@@ -44,7 +44,7 @@ BRAND FORMATTING â€” applied per docs/_branding/design.json (v1.0.0)
 | **Updated by** | Athena Chew |
 | **Date Created** | 2026-11-05 |
 | **Date Updated** | 2026-11-05 |
-| **Version** | [1.0] |
+| **Version** | 0.2 |
 | **LLM Used** | ChatGPT GPT-6 - To edit draft of specifications and check for errors and any missing information |
 | **Role** | Treasury Analyst / FP&A Analyst |
 | **Audience** | CFO / Director of Treasury |
@@ -69,8 +69,8 @@ All inputs should be exposed as workbook **named ranges** so Calculation Flow (Â
 | `FC_AMT` | Foreign-currency notional (receivable or payable) | FC | 3,400,000 |
 | `S0_in` | Spot exchange rate at inception | USD per FC | 1.1219 (indicative, replaced with live market data at Stage 4.)|
 | `F0_in` | Forward rate to settlement | USD per FC | 1.1756 (indicative, replaced with live market data at Stage 4.) |
-| `R_USD` | USD interest rate to settlement | Annual % | 3.88% (indicative, replaced with live market data at Stage 4.)|
-| `R_FC` | Foreign-currency interest rate to settlement | Annual % | 2.65% (indicative, replaced with live market data at Stage 4.)|
+| `R_USD` | USD interest rate to settlement | Annual % | 3.88% annual, ACT/360 (indicative, replaced with live market data at Stage 4.)|
+| `R_FC` | Foreign-currency interest rate to settlement | Annual % | 2.65% annual, ACT/360 (indicative, replaced with live market data at Stage 4.)|
 | `T_DAYS` | Days to settlement | Days | 273 |
 | `BASIS` | Day-count denominator (single-value simplification) | Days | 360 (USD, EUR) / 365 (GBP) |
 | `BASIS_USD` *(optional, rigorous variant)* | USD-leg day-count denominator | Days | 360 |
@@ -277,4 +277,4 @@ Record candidly what the model gets right and where it needs work. If you are wr
 | Version | Date | Author | Change |
 |---------|------|--------|--------|
 | 0.1 | 2026-11-05 | Athena Chew | Initial draft, based on https://github.com/adamwstauffer/shidler/blob/main/courses/International-Finance-And-Securities/projects/fx-hedging/_templates/template-spec.md |
-
+| 0.2 | 2026-11-05 | Athena Chew | Revised draft, fed through ChatGPT GPT 6.0 to look for any modeling errors or better way to phrase data |
