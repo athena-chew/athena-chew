@@ -18,7 +18,7 @@ llm_used: ChatGPT (GPT-6)
 
 ---
 
-## Executive Summary (≤150 words)
+## Executive Summary
 
 A U.S. commercial-HVAC manufacturer expects to receive EUR 3,400,000 from a Milan office developer in 273 days. Because the payment is in euros but the company measures its cash flow in U.S. dollars, a weaker euro could reduce the dollar value received. This brief evaluates three possible hedging strategies: a forward contract, a money-market hedge, and a EUR put option. The indicative forward rate of 1.1756 would secure USD 3,997,040 before any applicable costs. The EUR put premium is USD 0.0224 per euro, or USD 76,160 for the full receivable. The next stages will obtain current spot and interest-rate data, build and test a comparative model, and validate the results before a final hedge recommendation is made.
 
@@ -33,14 +33,14 @@ The objective is to compare three approaches for managing this exposure: a forwa
 The project will use the following approach:
 
 1. **Forward hedge:** Calculate the USD proceeds secured by selling EUR 3,400,000 forward at the indicative rate of 1.1756. The resulting amount is USD 3,997,040 before costs.
-  Pro: Complete certainty: budget is safe
-  Con: Give up all upside if EUR strengthens; counterparty/margin mechanics
+  Pro: No risk of loss if EUR weakens. The company earns the complete indicative rate today of 1.1756, resulting in 3,997,040 USD before costs.
+  Con: The company loses out on any money that would result from the Euro strengthening. 
 2. **Money-market hedge:** Obtain appropriate USD and EUR interest rates, calculate the present value of the receivable, and determine the USD value that can be secured through borrowing, conversion, and investment.
-  Pro: Same certainty as a forward; useful when forwards are unavailable or mispriced
-  Con: uses borrowing capacity; more moving parts
+  Pro: No risk of loss if the EUR weakens. The company is guaranteed to earn the money at the day-of conversation rate and then more from investments until the deliverable is received. There is no risk since the borrowed amount equals the receivable in the foreign currency.
+  Con: The company needs to have borrowing capacity to be able to borrow the money, as well as there are a lot of steps in this process to achieve this strategy. 
 3. **Option hedge:** Evaluate the EUR put's downside protection, premium cost, and potential benefit if the euro strengthens. The total put premium is USD 76,160. A EUR call will be considered for comparison but is generally less suitable for a company receiving euros.
-   Pro: floor under proceeds plus upside participation
-   Con: premium paid up front, hedge or not
+   Pro: There is a guarantee that the company will not lose the amount of money under the floor if the exchange rate goes under the floor. Also any profits that are made from the Euro strengthening will be realized and can be earned by the company. 
+   Con: The premium will always be paid from the beginning, whether the Euro strengthens or doesn't.
 4. **Risk testing:** Compare outcomes under different EUR/USD settlement rates, including a hypothetical 5% decline from the forward-rate reference. At 1.11682, the unhedged receivable would convert to approximately USD 3,797,188, about USD 199,852 less than the forward reference amount. This is an illustration, not a forecast.
 5. **Validation:** Record sources and timestamps for the current spot rate and interest rates, document assumptions, and check formulas and calculations.
 
