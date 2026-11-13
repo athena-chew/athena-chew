@@ -271,8 +271,8 @@ The workbook must contain the following tabs, each with a clearly defined purpos
 
 | Tab | Purpose |
 |---|---|
-| Cover | Identify the project, company, course, author, and model version. |
-| Legend/Key | Explain cell colors, input conventions, formulas, and workbook navigation. |
+| Cover | Identify the project, company, course, author, model version, date, and data-provenance block (placeholders noted as indicative). |
+| Legend/Key | Explain cell colors, input conventions, formulas, and workbook navigation. Yellow fill = inputs · Blue fill = assumptions · Green fill = formulas · Gray fill = outputs, applied throughout |
 | Inputs | Store all market inputs, assumptions, units, sources, and access dates. |
 | Forward Hedge | Calculate the locked-in USD proceeds using the forward exchange rate. |
 | Money-Market Hedge | Display the foreign-currency borrowing, spot conversion, and USD investment calculations separately. |
@@ -301,3 +301,4 @@ The workbook must contain the following tabs, each with a clearly defined purpos
 | 0.1 | 2026-11-05 | Athena Chew | Initial draft, based on https://github.com/adamwstauffer/shidler/blob/main/courses/International-Finance-And-Securities/projects/fx-hedging/_templates/template-spec.md |
 | 1.0 | 2026-11-05 | Athena Chew | Revised draft, fed through ChatGPT GPT 6.0 to look for any modeling errors or better way to phrase data |
 | 1.1 | 2026-11-12 | Athena Chew | Added validation, sources from which live data is pulled from, defined BASIS in context table, and fixed up some leftover indicators.
+| 1.2 | 2026-11-13 | Athena Chew | Revised workbook based on errors found in audit of AI generating workbook.
