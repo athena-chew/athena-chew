@@ -66,23 +66,23 @@ All inputs should be exposed as workbook **named ranges** so Calculation Flow (�
 
 | Standardized Name | Description | Unit | Example | Stage 4 Source |
 |-------------------|-------------|------|---------|-------:|
-| `FC_AMT` | Foreign-currency notional (receivable or payable) | FC | 3,400,000 | 
+| `FC_AMT` | Foreign-currency notional (receivable or payable) | FC | 3,400,000 | Given |
 | `S0_in` | Spot exchange rate at inception | USD per FC | 1.11687 (indicative, replaced with live market data at Stage 4.)| fxempire |
-| `F0_in` | Forward rate to settlement | USD per FC | 1.1756 |
+| `F0_in` | Forward rate to settlement | USD per FC | 1.1756 | Given |
 | `R_USD` | USD interest rate to settlement | Annual % | 4.56% annual, ACT/360 (indicative, replaced with live market data at Stage 4.)| H.15 |
 | `R_FC` | Foreign-currency interest rate to settlement | Annual % | 2.91% annual, ACT/360 (indicative, replaced with live market data at Stage 4.)| ECB |
-| `T_DAYS` | Days to settlement | Days | 273 |
-| `BASIS` | Day-count denominator (single-value simplification) | Days | 360 (USD, EUR) |
-| `K_PUT` | Put option strike (receivables) | USD per FC | 1.10499 - (Strikes at spot) |
-| `K_CALL` | Call option strike (payables) | USD per FC | 1.10499 - (Strike at spot) |
-| `PREM_PUT` | Put premium, USD per 1 FC | USD | 0.0224 |
-| `PREM_CALL` | Call premium, USD per 1 FC | USD | 0.0376 |
+| `T_DAYS` | Days to settlement | Days | 273 | Given |
+| `BASIS` | Day-count denominator (single-value simplification) | Days | 360 (USD, EUR) | Given |
+| `K_PUT` | Put option strike (receivables) | USD per FC | 1.10499 - (Strikes at spot) | Given |
+| `K_CALL` | Call option strike (payables) | USD per FC | 1.10499 - (Strike at spot) | Given |
+| `PREM_PUT` | Put premium, USD per 1 FC | USD | 0.0224 | Given |
+| `PREM_CALL` | Call premium, USD per 1 FC | USD | 0.0376 | Given |
 
 ### 2.2 Derived / Intermediate Values
 
 | Name | Description | Source |
 |------|-------------|--------|
-| `FV_PREM_PUT` | Future value of put premium at settlement | `−PREM_PUT × FC_AMT × (1 + R_USD × T_DAYS/BASIS)` |
+| `FV_PREM_PUT` | Future value of put premium at settlement | `−PREM_PUT × FC_AMT × (1 + R_USD × T_DAYS/BASIS)` | 
 | `FV_PREM_CALL` | Future value of call premium at settlement | `−PREM_CALL × FC_AMT × (1 + R_USD × T_DAYS/BASIS)` |
 | `S_T_grid` | Sensitivity spot grid at settlement | Built from `S0_in` ± 5% in 1% steps |
 | `USD_NO_HEDGE` | USD proceeds / outlay under no hedge | `S_T × FC_AMT` |
