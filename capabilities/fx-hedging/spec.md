@@ -64,16 +64,17 @@ All inputs should be exposed as workbook **named ranges** so Calculation Flow (�
 
 ### 2.1 Core Inputs
 
-| Standardized Name | Description | Unit | Example |
+| Standardized Name | Description | Unit | Example | 
 |-------------------|-------------|------|--------:|
 | `FC_AMT` | Foreign-currency notional (receivable or payable) | FC | 3,400,000 |
-| `S0_in` | Spot exchange rate at inception | USD per FC | 1.1219 (indicative, replaced with live market data at Stage 4.)|
-| `F0_in` | Forward rate to settlement | USD per FC | 1.1756 (indicative, replaced with live market data at Stage 4.) |
-| `R_USD` | USD interest rate to settlement | Annual % | 3.88% annual, ACT/360 (indicative, replaced with live market data at Stage 4.)|
-| `R_FC` | Foreign-currency interest rate to settlement | Annual % | 2.65% annual, ACT/360 (indicative, replaced with live market data at Stage 4.)|
+| `S0_in` | Spot exchange rate at inception | USD per FC | 1.10499 (indicative, replaced with live market data from fxempire at Stage 4.)|
+| `F0_in` | Forward rate to settlement | USD per FC | 1.11964 (indicative, replaced with live market data from fxempire at Stage 4.) |
+| `R_USD` | USD interest rate to settlement | Annual % | 3.88% annual, ACT/360 (indicative, replaced with live market data from H.15 at Stage 4.)|
+| `R_FC` | Foreign-currency interest rate to settlement | Annual % | 2.50% annual, ACT/360 (indicative, replaced with live market data from ECB at Stage 4.)|
 | `T_DAYS` | Days to settlement | Days | 273 |
-| `K_PUT` | Put option strike (receivables) | USD per FC | 1.122 - (Strikes near spot, indicated in S0_in, replaced with live market data at Stage 4.)) |
-| `K_CALL` | Call option strike (payables) | USD per FC | 1.122 - (Strikes near spot, indicated in S0_in, replaced with live market data at Stage 4.)) |
+| `BASIS` | Day-count denominator (single-value simplification) | Days | 360 (USD, EUR) |
+| `K_PUT` | Put option strike (receivables) | USD per FC | 1.100 - (Strikes near spot, chosen by me, replaced with live market data from CME Group at Stage 4.)) |
+| `K_CALL` | Call option strike (payables) | USD per FC | 1.110 - (Strikes near spot, chosen by me, replaced with live market data from CME Group at Stage 4.)) |
 | `PREM_PUT` | Put premium, USD per 1 FC | USD | 0.0224 |
 | `PREM_CALL` | Call premium, USD per 1 FC | USD | 0.0376 |
 
@@ -92,7 +93,9 @@ All inputs should be exposed as workbook **named ranges** so Calculation Flow (�
 
 State every convention used. Clarity here is what makes the model reproducible.
 
-- **Quote convention:** All rates expressed as **USD per unit of foreign currency, USD/EUR**. A higher quote means FC appreciation.
+- **Quote convention:** All rates expressed as **USD per unit of foreign currency** (e.g., USD/GBP, USD/EUR). A higher quote means FC appreciation.
+- **Horizon:** Single-maturity model; `T_DAYS = 365` unless otherwise noted. Templates assume a 1-year tenor.
+- **Day-count basis:** The default 1-year tenor uses the textbook simplified-annual form `(1 + r)` for both USD and FC legs. The general form is `r × T_DAYS / BASIS`, with `BASIS = 360` for USD and EUR money-market quotes (ACT/360) and `BASIS = 365` for GBP money-market quotes (ACT/365). The template exposes a **single `BASIS`** named range (simplification). A rigorous build should split it into `BASIS_USD` and `BASIS_FC` so each leg applies its own convention. Record it in §6.2.
 - **Parity:** Money-market hedge is assumed to replicate the forward hedge under covered interest-rate parity; any gap is a test of parity, not a model error.
 - **Option premium:** Paid upfront in USD, quoted per 1 unit of FC (no contract multiplier). Premia are expressed as a **negative cash flow** at t₀ and carried forward at `R_USD` to put them on the same footing as the settlement-date USD proceeds.
 - **Counterparty / credit risk:** Excluded. All derivatives assumed frictionless and creditworthy.
@@ -102,11 +105,12 @@ State every convention used. Clarity here is what makes the model reproducible.
 
 **Notes:**
 Sources Used:
-https://www.investing.com/economic-calendar/interest-rate-decision-164
-https://www.federalreserve.gov/releases/h15/
-https://www.investing.com/currencies/eur-usd-historical-data
+https://www.ecb.europa.eu/stats/policy_and_exchange_rates/key_ecb_interest_rates/html/index.en.html - EURO interest rate
+https://www.federalreserve.gov/releases/h15/ - USD interest rate
+https://www.fxempire.com/currencies/eur-usd - EURUSD forward and spot exchange rates
+https://www.cmegroup.com/markets/fx/g10/euro-fx/quotes/options#expiration=2026-12-6EZ6-8116 - EURUSD strike price
 
-Sources used for initial specification and model build. Will be replaced with live market data at Stage 4. Sources pulled as of market close, November 5, 2026
+Sources used for initial specification and model build. Will be replaced with live market data at Stage 4. Sources pulled as of market close, November 12, 2026
 
 ---
 
@@ -189,9 +193,9 @@ Record the base-case outcome at `S_T = S0_in` once the model is built. This bloc
 
 | Strategy | USD Proceeds (Receivable) | USD Outlay (Payable) | Hedge Profit vs. No Hedge |
 |----------|--------------------------:|---------------------:|--------------------------:|
-| No hedge | | | — |
-| Forward | | | |
-| Money market | | | |
+| No hedge | 3814460 | 0 | — |
+| Forward | 3997040 | 0 | + 4.79% |
+| Money market | 3918818.93486 | | |
 | Option (put / call) | | | |
 
 ---
@@ -202,11 +206,7 @@ Record candidly what the model gets right and where it needs work. If you are wr
 
 ### 6.1 What Worked
 
-- [What the model gets right, and the cell or check that shows it.]
-
 ### 6.2 What to Improve
-
-- [What to fix, and how. These notes become the improvement brief for the Stage 3 build.]
 
 ### 6.3 Auditability Checklist
 
