@@ -44,7 +44,7 @@ BRAND FORMATTING — applied per docs/_branding/design.json (v1.0.0)
 | **Updated by** | Athena Chew |
 | **Date Created** | 2026-11-05 |
 | **Date Updated** | 2026-11-05 |
-| **Version** | 1.0 |
+| **Version** | 1.1 |
 | **LLM Used** | ChatGPT GPT-6 - To edit draft of specifications and check for errors and any missing information |
 | **Role** | Treasury Analyst / FP&A Analyst |
 | **Audience** | CFO / Director of Treasury |
@@ -64,17 +64,17 @@ All inputs should be exposed as workbook **named ranges** so Calculation Flow (�
 
 ### 2.1 Core Inputs
 
-| Standardized Name | Description | Unit | Example | 
-|-------------------|-------------|------|--------:|
-| `FC_AMT` | Foreign-currency notional (receivable or payable) | FC | 3,400,000 |
-| `S0_in` | Spot exchange rate at inception | USD per FC | 1.10499 (indicative, replaced with live market data from fxempire at Stage 4.)|
-| `F0_in` | Forward rate to settlement | USD per FC | 1.11964 (indicative, replaced with live market data from fxempire at Stage 4.) |
-| `R_USD` | USD interest rate to settlement | Annual % | 3.88% annual, ACT/360 (indicative, replaced with live market data from H.15 at Stage 4.)|
-| `R_FC` | Foreign-currency interest rate to settlement | Annual % | 2.50% annual, ACT/360 (indicative, replaced with live market data from ECB at Stage 4.)|
+| Standardized Name | Description | Unit | Example | Stage 4 Source |
+|-------------------|-------------|------|---------|-------:|
+| `FC_AMT` | Foreign-currency notional (receivable or payable) | FC | 3,400,000 | 
+| `S0_in` | Spot exchange rate at inception | USD per FC | 1.11687 (indicative, replaced with live market data at Stage 4.)| fxempire |
+| `F0_in` | Forward rate to settlement | USD per FC | 1.1756 |
+| `R_USD` | USD interest rate to settlement | Annual % | 4.56% annual, ACT/360 (indicative, replaced with live market data at Stage 4.)| H.15 |
+| `R_FC` | Foreign-currency interest rate to settlement | Annual % | 2.91% annual, ACT/360 (indicative, replaced with live market data at Stage 4.)| ECB |
 | `T_DAYS` | Days to settlement | Days | 273 |
 | `BASIS` | Day-count denominator (single-value simplification) | Days | 360 (USD, EUR) |
-| `K_PUT` | Put option strike (receivables) | USD per FC | 1.100 - (Strikes near spot, chosen by me, replaced with live market data from CME Group at Stage 4.)) |
-| `K_CALL` | Call option strike (payables) | USD per FC | 1.110 - (Strikes near spot, chosen by me, replaced with live market data from CME Group at Stage 4.)) |
+| `K_PUT` | Put option strike (receivables) | USD per FC | 1.10499 - (Strikes at spot) |
+| `K_CALL` | Call option strike (payables) | USD per FC | 1.10499 - (Strike at spot) |
 | `PREM_PUT` | Put premium, USD per 1 FC | USD | 0.0224 |
 | `PREM_CALL` | Call premium, USD per 1 FC | USD | 0.0376 |
 
@@ -107,10 +107,9 @@ State every convention used. Clarity here is what makes the model reproducible.
 Sources Used:
 https://www.ecb.europa.eu/stats/policy_and_exchange_rates/key_ecb_interest_rates/html/index.en.html - EURO interest rate
 https://www.federalreserve.gov/releases/h15/ - USD interest rate
-https://www.fxempire.com/currencies/eur-usd - EURUSD forward and spot exchange rates
-https://www.cmegroup.com/markets/fx/g10/euro-fx/quotes/options#expiration=2026-12-6EZ6-8116 - EURUSD strike price
+https://www.fxempire.com/currencies/eur-usd - EURUSD spot exchange rates
 
-Sources used for initial specification and model build. Will be replaced with live market data at Stage 4. Sources pulled as of market close, November 12, 2026
+Sources used for initial specification and model build. Will be replaced with live market data at Stage 4. Sources pulled as of market close, November 10, 2026
 
 ---
 
@@ -193,10 +192,10 @@ Record the base-case outcome at `S_T = S0_in` once the model is built. This bloc
 
 | Strategy | USD Proceeds (Receivable) | USD Outlay (Payable) | Hedge Profit vs. No Hedge |
 |----------|--------------------------:|---------------------:|--------------------------:|
-| No hedge | 3814460 | 0 | — |
-| Forward | 3997040 | 0 | + 4.79% |
-| Money market | 3918818.93486 | | |
-| Option (put / call) | | | |
+| No hedge | 3797358 | 0 | — |
+| Forward | 3997040 | 0 | + 5.0% |
+| Money market | 3843847 | 0 | + 1.2%|
+| Option (put / call) | 3797358 | 78793 | -2.11% |
 
 ---
 
@@ -301,3 +300,4 @@ The workbook must contain the following tabs, each with a clearly defined purpos
 |---------|------|--------|--------|
 | 0.1 | 2026-11-05 | Athena Chew | Initial draft, based on https://github.com/adamwstauffer/shidler/blob/main/courses/International-Finance-And-Securities/projects/fx-hedging/_templates/template-spec.md |
 | 1.0 | 2026-11-05 | Athena Chew | Revised draft, fed through ChatGPT GPT 6.0 to look for any modeling errors or better way to phrase data |
+| 1.1 | 2026-11-12 | Athena Chew | Added validation, sources from which live data is pulled from, defined BASIS in context table, and fixed up some leftover indicators.
