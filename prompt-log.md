@@ -36,6 +36,7 @@ Two near-identical 10-tab workbooks, FX_Hedge_Model_Commercial-HVAC.xlsx and mod
 | Forward |	3,997,040 |
 | Money market |	3,843,847 |
 | Option	| 3,718,564 |
+
 Validation shows 35 PASS and 1 FAIL out of 36 checks.
 
 - **What was wrong and how it was caught:** Legend contradicted the formatting. It said “Green text = formula calculated on this tab”, but the cells use black for same-tab formulas and green for cross-tab links. I caught it by comparing the legend text with the actual font colours cell by cell. The corrected file fixes the legend. The original also tracked forward points, which were omitted in the second. The parity check fails by 3.83% (about $153k), and that comes from the inputs rather than the formulas. The bank forward of 1.1756 is far above the covered-interest-parity forward of 1.1305. The workbook’s own parity check and the Validation tab flag it. The workbook leaves F0_in unchanged, documents the gap and recommends requesting a requote.
