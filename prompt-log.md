@@ -21,3 +21,21 @@
 - **Produced:** A detailed review identifying technical corrections, missing requirements, and recommended wording revisions. Recommendations included: (1) correcting the distinction between option strike prices (K_PUT, K_CALL) and premiums (PREM_PUT, PREM_CALL); (2) clarifying ACT/360 day-count conventions for USD and EUR; (3) documenting how option premiums are carried forward to settlement to avoid double-counting; (4) defining the missing STEP_FRAC variable; (5) adding a workbook tab architecture; (6) establishing explicit validation rules; (7) improving the problem statement to explain the EUR 3,400,000 receivable and its foreign-exchange risk; and (8) clarifying that the primary model should focus on the receivable exposure. Also recommended revising the document structure to match the website's eight required sections, completing the model review, and maintaining a prompt-log.md documenting AI-assisted revisions.
   
 - **What was wrong and how it was caught:** (1) The original specification listed option strikes of 0.023 and 0.038 USD/EUR, which appeared to confuse the assigned option premiums with strike prices. (2) The day-count instructions offered multiple conventions, potentially causing inconsistent AI calculations. (3) The workbook tab architecture was missing, leaving the AI too much discretion over workbook organization. (4) STEP_FRAC appeared in the auditability checklist but was not defined in the inputs. (5) The problem statement used informal and financially imprecise wording, particularly regarding gross margin and lost conversion value. (6) The validation requirements were partially included in the auditability checklist rather than presented as a dedicated section. These issues were identified during the specification review, with suggested corrections provided before the Stage 3 AI-assisted model build.
+
+# 2026-11-13
+
+- **Asked:** You wanted a workbook built from your model specification, and every item in its build contract was binding: all ten named ranges formulas only, with no pasted values a cover page a Legend/Key tab with the colour convention all three hedge families (forward, money market, option)
+the ±5% sensitivity table with a chart validation checks computed in the workbook It had to be a downloadable .xlsx, and you wanted questions before building if anything in the spec was ambiguous. The spec file itself wasn’t uploaded here. Only the two workbooks were, so I worked from the spec references quoted inside them (spec.md v1.1, §2.1, §3, §4, §5.1, §6.4).
+
+- **Produced:**
+Two near-identical 10-tab workbooks, FX_Hedge_Model_Commercial-HVAC.xlsx and model_xlsx.xlsx. The tabs are Cover, Legend-Key, Inputs, Forward Hedge, Money-Market Hedge, Option Hedge, Payable Hedge, Sensitivity, Validation and Notes & Assumptions. The exposure is EUR 3.4M over 273 days. The workbooks have 68 named ranges, two line charts, and no cached errors. Arial is used throughout. Every calculation tab is formulas only. The only hardcoded numbers are on Inputs, Validation (check numbers and tolerances) and the Notes regression table. The base-case numbers recompute correctly. The values below are the receivable proceeds at spot, and the Option row is the same figure after the future-valued put premium:
+
+| Strategy |	USD proceeds |
+| No hedge |	3,797,358 |
+| Forward |	3,997,040 |
+| Money market |	3,843,847 |
+| Option	| 3,718,564 |
+Validation shows 35 PASS and 1 FAIL out of 36 checks.
+
+- **What was wrong and how it was caught:** Legend contradicted the formatting. It said “Green text = formula calculated on this tab”, but the cells use black for same-tab formulas and green for cross-tab links. I caught it by comparing the legend text with the actual font colours cell by cell. The corrected file fixes the legend. The original also tracked forward points, which were omitted in the second. The parity check fails by 3.83% (about $153k), and that comes from the inputs rather than the formulas. The bank forward of 1.1756 is far above the covered-interest-parity forward of 1.1305. The workbook’s own parity check and the Validation tab flag it. The workbook leaves F0_in unchanged, documents the gap and recommends requesting a requote.
+The tab is “Legend-Key” because Excel doesn’t allow “/” in sheet names.
