@@ -29,7 +29,6 @@ the ±5% sensitivity table with a chart validation checks computed in the workbo
 
 - **Produced:**
 Two near-identical 10-tab workbooks, FX_Hedge_Model_Commercial-HVAC.xlsx and model_xlsx.xlsx. The tabs are Cover, Legend-Key, Inputs, Forward Hedge, Money-Market Hedge, Option Hedge, Payable Hedge, Sensitivity, Validation and Notes & Assumptions. The exposure is EUR 3.4M over 273 days. The workbooks have 68 named ranges, two line charts, and no cached errors. Arial is used throughout. Every calculation tab is formulas only. The only hardcoded numbers are on Inputs, Validation (check numbers and tolerances) and the Notes regression table. The base-case numbers recompute correctly. The values below are the receivable proceeds at spot, and the Option row is the same figure after the future-valued put premium:
-
 | Strategy |	USD proceeds |
 |----------|---------------|
 | No hedge |	3,797,358 |
