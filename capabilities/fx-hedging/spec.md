@@ -44,7 +44,7 @@ BRAND FORMATTING — applied per docs/_branding/design.json (v1.0.0)
 | **Updated by** | Athena Chew |
 | **Date Created** | 2026-11-05 |
 | **Date Updated** | 2026-11-05 |
-| **Version** | 1.1 |
+| **Version** | 1.2 |
 | **LLM Used** | ChatGPT GPT-6 - To edit draft of specifications and check for errors and any missing information |
 | **Role** | Treasury Analyst / FP&A Analyst |
 | **Audience** | CFO / Director of Treasury |
