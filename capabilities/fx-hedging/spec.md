@@ -73,8 +73,8 @@ All inputs should be exposed as workbook **named ranges** so Calculation Flow (Â
 | `R_FC` | Foreign-currency interest rate to settlement | Annual % | 2.91% annual, ACT/360 (indicative, replaced with live market data at Stage 4.)| ECB |
 | `T_DAYS` | Days to settlement | Days | 273 | Given |
 | `BASIS` | Day-count denominator (single-value simplification) | Days | 360 (USD, EUR) | Given |
-| `K_PUT` | Put option strike (receivables) | USD per FC | 1.10499 - (Strikes at spot) | Given |
-| `K_CALL` | Call option strike (payables) | USD per FC | 1.10499 - (Strike at spot) | Given |
+| `K_PUT` | Put option strike (receivables) | USD per FC | 1.11687 - (Strikes at spot) | Given |
+| `K_CALL` | Call option strike (payables) | USD per FC | 1.11687 - (Strike at spot) | Given |
 | `PREM_PUT` | Put premium, USD per 1 FC | USD | 0.0224 | Given |
 | `PREM_CALL` | Call premium, USD per 1 FC | USD | 0.0376 | Given |
 
