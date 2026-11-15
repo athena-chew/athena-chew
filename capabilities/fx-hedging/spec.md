@@ -192,7 +192,7 @@ Record the base-case outcome at `S_T = S0_in` once the model is built. This bloc
 | Strategy | USD Proceeds (Receivable) | USD Outlay (Payable) | Hedge Profit vs. No Hedge |
 |----------|--------------------------:|---------------------:|--------------------------:|
 | No hedge | 3797358 | 0 | — |
-| Forward | 3997040 | 0 | + 5.00% |
+| Forward | 3997040 | 0 | + 5.25% |
 | Money market | 3843847 | 0 | + 1.20%|
 | Option (put) | 3797358 | 78793 | -2.11% |
 | Option (call) | 3665097 | 132261 | -3.48% | 
