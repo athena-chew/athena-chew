@@ -94,8 +94,7 @@ All inputs should be exposed as workbook **named ranges** so Calculation Flow (�
 State every convention used. Clarity here is what makes the model reproducible.
 
 - **Quote convention:** All rates expressed as **USD per unit of foreign currency** (e.g., USD/GBP, USD/EUR). A higher quote means FC appreciation.
-- **Horizon:** Single-maturity model; `T_DAYS = 365` unless otherwise noted. Templates assume a 1-year tenor.
-- **Day-count basis:** The default 1-year tenor uses the textbook simplified-annual form `(1 + r)` for both USD and FC legs. The general form is `r × T_DAYS / BASIS`, with `BASIS = 360` for USD and EUR money-market quotes (ACT/360) and `BASIS = 365` for GBP money-market quotes (ACT/365). The template exposes a **single `BASIS`** named range (simplification). A rigorous build should split it into `BASIS_USD` and `BASIS_FC` so each leg applies its own convention. Record it in §6.2.
+- **Day-count basis:** The default 1-year tenor uses the textbook simplified-annual form `(1 + r)` for both USD and FC legs. The general form is `r × T_DAYS / BASIS`, with `BASIS = 360` for USD and EUR money-market quotes (ACT/360). The template exposes a **single `BASIS`** named range (simplification). A rigorous build should split it into `BASIS_USD` and `BASIS_FC` so each leg applies its own convention. Record it in §6.2.
 - **Parity:** Money-market hedge is assumed to replicate the forward hedge under covered interest-rate parity; any gap is a test of parity, not a model error.
 - **Option premium:** Paid upfront in USD, quoted per 1 unit of FC (no contract multiplier). Premia are expressed as a **negative cash flow** at t₀ and carried forward at `R_USD` to put them on the same footing as the settlement-date USD proceeds.
 - **Counterparty / credit risk:** Excluded. All derivatives assumed frictionless and creditworthy.
@@ -178,7 +177,7 @@ For a payable of `FC_AMT` to be settled in FC at maturity, the model mirrors Ste
 
 | Output | Description | Format | Purpose |
 |--------|-------------|--------|---------|
-| Input panel | All named-range inputs with units, sources, and access dates | Top of each tab | Single source of truth |
+| Input panel | All named-range inputs with units, sources, and access dates | Top of input tab | Single source of truth |
 | Strategy summary | `USD_FWD`, `USD_MM`, `USD_BASE_k` per strategy, plus `USD_FLOOR_PUT` (receivable) / `USD_CEILING_CALL` (payable) | Table above sensitivity grid | Executive at-a-glance |
 | Sensitivity table | USD proceeds / outlay for each strategy across `S_T_grid` ± 5% | Table on each tab | Core analytical evidence |
 | Hedge-profit columns | `USD_k − USD_NO_HEDGE` for each strategy per row | Sub-table | Isolates hedge value-add |
@@ -193,9 +192,11 @@ Record the base-case outcome at `S_T = S0_in` once the model is built. This bloc
 | Strategy | USD Proceeds (Receivable) | USD Outlay (Payable) | Hedge Profit vs. No Hedge |
 |----------|--------------------------:|---------------------:|--------------------------:|
 | No hedge | 3797358 | 0 | — |
-| Forward | 3997040 | 0 | + 5.0% |
-| Money market | 3843847 | 0 | + 1.2%|
-| Option (put / call) | 3797358 | 78793 | -2.11% |
+| Forward | 3997040 | 0 | + 5.00% |
+| Money market | 3843847 | 0 | + 1.20%|
+| Option (put) | 3797358 | 78793 | -2.11% |
+| Option (call) | 3665097 | 132261 | -3.48% | 
+
 
 ---
 
@@ -203,11 +204,7 @@ Record the base-case outcome at `S_T = S0_in` once the model is built. This bloc
 
 Record candidly what the model gets right and where it needs work. If you are writing this spec before the build, use the notes below as a known-risks register — these pitfalls are common in FX hedge models and are worth designing against from the start; if iterating after a first build, treat them as a review of what to fix.
 
-### 6.1 What Worked
-
-### 6.2 What to Improve
-
-### 6.3 Auditability Checklist
+### 6.1 Auditability Checklist
 
 - [ ] Every input has a standardized named range from §2.1
 - [ ] Every formula in §4 uses named ranges — no bare `$F$n` references
@@ -217,7 +214,7 @@ Record candidly what the model gets right and where it needs work. If you are wr
 - [ ] Notes tab records spot / forward / rate sources with access dates
 - [ ] Cell colors match the legend: <span style="background:#FFFF00;">yellow</span> inputs, <span style="color:#0000FF;">blue</span> assumptions, black formulas, <span style="color:#024731;">green</span> cross-tab links
 
-### 6.4 Validation Checklist
+### 6.2 Validation Checklist
 The completed workbook must pass the following validation checks before its outputs are used for the Stage 5 decision memo.
 
 - Input validation: All ten standardized named ranges must be present, correctly defined, and linked to the appropriate input cells.
@@ -302,3 +299,4 @@ The workbook must contain the following tabs, each with a clearly defined purpos
 | 1.0 | 2026-11-05 | Athena Chew | Revised draft, fed through ChatGPT GPT 6.0 to look for any modeling errors or better way to phrase data |
 | 1.1 | 2026-11-12 | Athena Chew | Added validation, sources from which live data is pulled from, defined BASIS in context table, and fixed up some leftover indicators.
 | 1.2 | 2026-11-13 | Athena Chew | Revised workbook based on errors found in audit of AI generating workbook.
+| 1.3 | 2026-11-15 | Athena Chew | Quickly added missing additions,.
