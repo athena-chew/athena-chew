@@ -12,6 +12,6 @@ Audit Notes
  
 - All other validation besides the parity check from earlier is shown in the validation tab to work and be correct throughout the spreadsheet. I went through all of the checks that it uses and confirmed that it correctly takes the value and applies it to the check that it defines. I also checked that all definitions matched to those within the specification. All 35 validation checks other than the parity check is correct, and the parity check is correctly stated to be because of the forward bank quote, not because of the calculation, which matches the specification. This was further validated by checking each individual value all the final calculated forward and money market hedge, which matched the spec. 
 
-- Changed the fixes above into the spec and then fed it into ChatGPT for a revised notebook.
+- Changed the fixes above into the spec and then fed it into ChatGPT for a revised notebook, model_2.
 
-- On second pass the AI fixed all issues above except for parity, due to the same reason as above.
+- On second pass the AI fixed all issues above except for parity, due to the same reason as above. Realized that this is due to using live data within the specification, which causes the logic to break. Changed spec to reflect values that should calculate correctly and fed it back into ChatGPT for a further revised notebook, model_3.
