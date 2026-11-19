@@ -69,7 +69,7 @@ All inputs should be exposed as workbook **named ranges** so Calculation Flow (�
 | `FC_AMT` | Foreign-currency notional (receivable or payable) | FC | 3,400,000 | Given |
 | `S0_in` | Spot exchange rate at inception | USD per FC | 1.1641 (indicative, replaced with live market data at Stage 4.)| fxempire |
 | `F0_in` | Forward rate to settlement | USD per FC | 1.1756 | Given |
-| `R_USD` | USD interest rate to settlement | Annual % | 3.45 % annual, ACT/360 (indicative, replaced with live market data at Stage 4.)| H.15 |
+| `R_USD` | USD interest rate to settlement | Annual % | 3.45% annual, ACT/360 (indicative, replaced with live market data at Stage 4.)| H.15 |
 | `R_FC` | Foreign-currency interest rate to settlement | Annual % | 2.12% annual, ACT/360 (indicative, replaced with live market data at Stage 4.)| ECB |
 | `T_DAYS` | Days to settlement | Days | 273 | Given |
 | `BASIS` | Day-count denominator (single-value simplification) | Days | 360 (USD, EUR) | Given |
@@ -191,10 +191,10 @@ Record the base-case outcome at `S_T = S0_in` once the model is built. This bloc
 
 | Strategy | USD Proceeds (Receivable) | USD Outlay (Payable) | Hedge Profit vs. No Hedge |
 |----------|--------------------------:|---------------------:|--------------------------:|
-| No hedge | 3797358 | 0 | — |
-| Forward | 3997040 | 0 | + 5.25% |
-| Money market | 3843847 | 0 | + 1.20%|
-| Option (put) | 3718565 | 78793 | -2.07% |
+| No hedge | 3957940 | 0 | — |
+| Forward | 3997040 | 0 | + 0.99% |
+| Money market | 3997228 | 0 | + 0.99%|
+| Option (put) | 3881780 | 76160 | -1.92% |
 
 ---
 
@@ -215,7 +215,7 @@ Record candidly what the model gets right and where it needs work. If you are wr
 ### 6.2 Validation Checklist
 The completed workbook must pass the following validation checks before its outputs are used for the Stage 5 decision memo.
 
-- Input validation: All ten standardized named ranges must be present, correctly defined, and linked to the appropriate input cells.
+- Input validation: All eleven standardized named ranges must be present, correctly defined, and linked to the appropriate input cells.
 - Forward hedge: USD proceeds must equal FC_AMT × F0_in and remain constant across all sensitivity scenarios.
 - Money-market hedge: The foreign-currency borrowing must equal the present value of the receivable. The loan must be fully repaid by the EUR receivable at maturity.
 - Interest rate parity: Money-market hedge proceeds should approximately equal forward hedge proceeds when the inputs satisfy covered interest rate parity, subject to rounding and consistent market conventions.
