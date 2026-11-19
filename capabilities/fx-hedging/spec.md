@@ -67,14 +67,14 @@ All inputs should be exposed as workbook **named ranges** so Calculation Flow (Â
 | Standardized Name | Description | Unit | Example | Stage 4 Source |
 |-------------------|-------------|------|---------|-------:|
 | `FC_AMT` | Foreign-currency notional (receivable or payable) | FC | 3,400,000 | Given |
-| `S0_in` | Spot exchange rate at inception | USD per FC | 1.11687 (indicative, replaced with live market data at Stage 4.)| fxempire |
+| `S0_in` | Spot exchange rate at inception | USD per FC | 1.1641 (indicative, replaced with live market data at Stage 4.)| fxempire |
 | `F0_in` | Forward rate to settlement | USD per FC | 1.1756 | Given |
-| `R_USD` | USD interest rate to settlement | Annual % | 4.56% annual, ACT/360 (indicative, replaced with live market data at Stage 4.)| H.15 |
-| `R_FC` | Foreign-currency interest rate to settlement | Annual % | 2.91% annual, ACT/360 (indicative, replaced with live market data at Stage 4.)| ECB |
+| `R_USD` | USD interest rate to settlement | Annual % | 3.45 % annual, ACT/360 (indicative, replaced with live market data at Stage 4.)| H.15 |
+| `R_FC` | Foreign-currency interest rate to settlement | Annual % | 2.12% annual, ACT/360 (indicative, replaced with live market data at Stage 4.)| ECB |
 | `T_DAYS` | Days to settlement | Days | 273 | Given |
 | `BASIS` | Day-count denominator (single-value simplification) | Days | 360 (USD, EUR) | Given |
-| `K_PUT` | Put option strike (receivables) | USD per FC | 1.11687 - (Strikes at spot) | Given |
-| `K_CALL` | Call option strike (payables) | USD per FC | 1.11687 - (Strike at spot) | Given |
+| `K_PUT` | Put option strike (receivables) | USD per FC | 1.1641 - (Strikes at spot) | Given |
+| `K_CALL` | Call option strike (payables) | USD per FC | 1.1641 - (Strikes at spot) | Given |
 | `PREM_PUT` | Put premium, USD per 1 FC | USD | 0.0224 | Given |
 | `PREM_CALL` | Call premium, USD per 1 FC | USD | 0.0376 | Given |
 
@@ -298,4 +298,4 @@ The workbook must contain the following tabs, each with a clearly defined purpos
 | 1.1 | 2026-11-12 | Athena Chew | Added validation, sources from which live data is pulled from, defined BASIS in context table, and fixed up some leftover indicators.
 | 1.2 | 2026-11-13 | Athena Chew | Revised workbook based on errors found in audit of AI generating workbook.
 | 1.3 | 2026-11-15 | Athena Chew | Quickly added missing additions.
-| 1.4 | 2026-11-19 | Athena Chew | Fixed mathematical calculations.
+| 1.4 | 2026-11-19 | Athena Chew | Fixed mathematical calculations. Realized that live data coded into the specification was messing up the calculations and checks, so replaced indicative values with data confirmed by FX Hedging lab to match, with all givens remained untouched. 
