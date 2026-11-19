@@ -44,7 +44,7 @@ BRAND FORMATTING — applied per docs/_branding/design.json (v1.0.0)
 | **Updated by** | Athena Chew |
 | **Date Created** | 2026-11-05 |
 | **Date Updated** | 2026-11-05 |
-| **Version** | 1.2 |
+| **Version** | 1.4 |
 | **LLM Used** | ChatGPT GPT-6 - To edit draft of specifications and check for errors and any missing information |
 | **Role** | Treasury Analyst / FP&A Analyst |
 | **Audience** | CFO / Director of Treasury |
@@ -94,7 +94,7 @@ All inputs should be exposed as workbook **named ranges** so Calculation Flow (�
 State every convention used. Clarity here is what makes the model reproducible.
 
 - **Quote convention:** All rates expressed as **USD per unit of foreign currency** (e.g., USD/GBP, USD/EUR). A higher quote means FC appreciation.
-- **Day-count basis:** The default 1-year tenor uses the textbook simplified-annual form `(1 + r)` for both USD and FC legs. The general form is `r × T_DAYS / BASIS`, with `BASIS = 360` for USD and EUR money-market quotes (ACT/360). The template exposes a **single `BASIS`** named range (simplification). A rigorous build should split it into `BASIS_USD` and `BASIS_FC` so each leg applies its own convention. Record it in §6.2.
+- **Day-count basis:** The default 1-year tenor uses the textbook simplified-annual form `(1 + r)` for both USD and FC legs. The general form is `r × T_DAYS / BASIS`, with `BASIS = 360` for USD and EUR money-market quotes (ACT/360). The template exposes a **single `BASIS`** named range (simplification). A rigorous build should split it into `BASIS_USD` and `BASIS_FC` so each leg applies its own convention.
 - **Parity:** Money-market hedge is assumed to replicate the forward hedge under covered interest-rate parity; any gap is a test of parity, not a model error.
 - **Option premium:** Paid upfront in USD, quoted per 1 unit of FC (no contract multiplier). Premia are expressed as a **negative cash flow** at t₀ and carried forward at `R_USD` to put them on the same footing as the settlement-date USD proceeds.
 - **Counterparty / credit risk:** Excluded. All derivatives assumed frictionless and creditworthy.
@@ -194,9 +194,7 @@ Record the base-case outcome at `S_T = S0_in` once the model is built. This bloc
 | No hedge | 3797358 | 0 | — |
 | Forward | 3997040 | 0 | + 5.25% |
 | Money market | 3843847 | 0 | + 1.20%|
-| Option (put) | 3797358 | 78793 | -2.11% |
-| Option (call) | 3665097 | 132261 | -3.48% | 
-
+| Option (put) | 3718565 | 78793 | -2.07% |
 
 ---
 
@@ -299,4 +297,5 @@ The workbook must contain the following tabs, each with a clearly defined purpos
 | 1.0 | 2026-11-05 | Athena Chew | Revised draft, fed through ChatGPT GPT 6.0 to look for any modeling errors or better way to phrase data |
 | 1.1 | 2026-11-12 | Athena Chew | Added validation, sources from which live data is pulled from, defined BASIS in context table, and fixed up some leftover indicators.
 | 1.2 | 2026-11-13 | Athena Chew | Revised workbook based on errors found in audit of AI generating workbook.
-| 1.3 | 2026-11-15 | Athena Chew | Quickly added missing additions,.
+| 1.3 | 2026-11-15 | Athena Chew | Quickly added missing additions.
+| 1.4 | 2026-11-19 | Athena Chew | Fixed mathematical calculations.
