@@ -20,3 +20,8 @@
 - Forward hedge payable: FC_AMT * F0_CIP = 3400000 * 1.1300 = 3842000
 - Difference from rate F0_in: -0.0456
 - Difference from forward hedge payable: 155040 USD
+
+**Workbook checks**
+10 of the 12 validations were correct and the table was repopulared correctly using the new data. The only validations that weren't correct were the EUR borrowing fully repaid validation and the parity within 0.05% validation. The EUR borrowing was solely because the formula was selecting B13 of the money market hedge tab, which corresponded to the completed check, and then subtracting from the original recievable. This step already does this check, so adding the extra subtraction made the check incorrect. Instead, I changed the formula so that it would just take the final check at face value.
+
+
