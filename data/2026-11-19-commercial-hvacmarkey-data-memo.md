@@ -15,8 +15,8 @@
 | T_DAYS    | 273     | Given         | -                          | Given by scenario      | 
 
 **The CIP-implied forward**
-Equation: F0_CIP = S0 × (1 + R_USD × T/360) / (1 + R_FC × T/360)
-Rate: 1.1300 USD per FC
-Forward hedge payable: FC_AMT * F0_CIP = 3400000 * 1.1300 = 3842000
-Difference from rate F0_in: -0.0456
-Difference from forward hedge payable: 155040 USD
+-Equation: F0_CIP = S0 × (1 + R_USD × T/360) / (1 + R_FC × T/360)
+-Rate: 1.1300 USD per FC
+-Forward hedge payable: FC_AMT * F0_CIP = 3400000 * 1.1300 = 3842000
+-Difference from rate F0_in: -0.0456
+-Difference from forward hedge payable: 155040 USD
