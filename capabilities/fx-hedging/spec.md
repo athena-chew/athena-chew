@@ -67,7 +67,7 @@ All inputs should be exposed as workbook **named ranges** so Calculation Flow (Â
 | Standardized Name | Description | Unit | Example | Stage 4 Source |
 |-------------------|-------------|------|---------|-------:|
 | `FC_AMT` | Foreign-currency notional (receivable or payable) | FC | 3,400,000 | Given |
-| `S0_in` | Spot exchange rate at inception | USD per FC | 1.1641 (indicative, replaced with live market data at Stage 4.)| fxempire |
+| `S0_in` | Spot exchange rate at inception | USD per FC | 1.1641 (indicative, replaced with live market data at Stage 4.)| investing.com |
 | `F0_in` | Forward rate to settlement | USD per FC | 1.1756 | Given |
 | `R_USD` | USD interest rate to settlement | Annual % | 3.45% annual, ACT/360 (indicative, replaced with live market data at Stage 4.)| H.15 |
 | `R_FC` | Foreign-currency interest rate to settlement | Annual % | 2.12% annual, ACT/360 (indicative, replaced with live market data at Stage 4.)| ECB |
@@ -106,9 +106,9 @@ State every convention used. Clarity here is what makes the model reproducible.
 Sources Used:
 https://www.ecb.europa.eu/stats/policy_and_exchange_rates/key_ecb_interest_rates/html/index.en.html - EURO interest rate
 https://www.federalreserve.gov/releases/h15/ - USD interest rate
-https://www.fxempire.com/currencies/eur-usd - EURUSD spot exchange rates
+https://www.investing.com/currencies/eur-usd-historical-data - EURUSD spot exchange rates
 
-Sources used for initial specification and model build. Will be replaced with live market data at Stage 4. Sources pulled as of market close, November 10, 2026
+Indicative numbers in this stage will be replaced with live market data at Stage 4. Sources pulled as of market close, November 10, 2026
 
 ---
 
