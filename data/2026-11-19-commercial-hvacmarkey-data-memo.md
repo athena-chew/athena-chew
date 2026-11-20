@@ -3,8 +3,8 @@
 |  Name     |  Value  |  Source       |  Retrieved on              |  Computation Used      |
 |-----------|---------|---------------|----------------------------|------------------------|
 | S0_in     | 1.1164  | investing.com | 2026-11-10 16:00:00 ET     | Market close spot rate |
-| R_USD     | 4.56%   | H.15          | 2026 - 11 -10 16:00:00 ET  | 1-year treasury bills are used, since they reflect risk-free and is purely based on yield curve. |
-| R_FC      | 2.91%   | ECB           | 2026 - 11 - 10 16:00:00 ET | 1-year AAA euro-area yield curve is used, since it reflects the most stable central governments of the euro-area, making it nearly risk-free. 
+| R_USD     | 4.56%   | H.15          | 2026-11-10 16:00:00 ET     | 1-year treasury bills are used, since they reflect risk-free and is purely based on yield curve. |
+| R_FC      | 2.91%   | ECB           | 2026-11-10 16:00:00 ET     | 1-year AAA euro-area yield curve is used, since it reflects the most stable central governments of the euro-area, making it nearly risk-free. 
 | F0_in     | 1.1756  | Given         | -                          | Given by bank          |
 | F0_CIP    | 1.1300  | Calculated    | -                          | S0 × (1 + R_USD × T/360) / (1 + R_FC × T/360) | 
 | K_PUT     | 1.1164  | S0_in         | -                          | Strikes at spot        |
@@ -22,6 +22,9 @@
 - Difference from forward hedge payable: 155040 USD
 
 **Workbook checks**
-10 of the 12 validations were correct and the table was repopulared correctly using the new data. The only validations that weren't correct were the EUR borrowing fully repaid validation and the parity within 0.05% validation. The EUR borrowing was solely because the formula was selecting B13 of the money market hedge tab, which corresponded to the completed check, and then subtracting from the original recievable. This step already does this check, so adding the extra subtraction made the check incorrect. Instead, I changed the formula so that it would just take the final check at face value.
+
+10 of the 12 validations were correct and the table was repopulated correctly using the new data. All the data within the sensitivity graph was compared to the hedging lab calculator, and all values correctly matched. The only validations that weren't correct were the EUR borrowing fully repaid validation and the parity within 0.05% validation. The EUR borrowing was solely because the formula was selecting B13 of the money market hedge tab, which corresponded to the completed check, and then subtracting from the original receivable. This step already does this check, so adding the extra subtraction made the check incorrect. Instead, I changed the formula so that it would just take the final check at face value.
+
+For the parity check, the relative distance between the money market and the forward hedge was 3.87%, calculated in B21 of Money Market Hedge. This is much higher than the accepted threshold of 0.05%, which the parity check correctly flags. Calculating the forward hedge and the money market hedge manually gives a difference of 154,811.01, a percentage difference of 3.87%, which are both correctly calculated in the workbook. This suggests not an issue with the workbook itself, but with the bank proposed forward hedge. This works to our benefit, as the quote would receive more money than the money market hedge. 
 
 
