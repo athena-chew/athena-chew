@@ -15,3 +15,7 @@ Audit Notes
 - Changed the fixes above into the spec and then fed it into ChatGPT for a revised notebook, model_2.
 
 - On second pass the AI fixed all issues above except for parity, due to the same reason as above. Realized that this is due to using live data within the specification, which causes the logic to break. Changed spec to reflect values that should calculate correctly and fed it back into ChatGPT for a further revised notebook, model_3.
+
+- After GPT 6 returned model_3, all methods above were revalidated and proved correct by the same reasons as above. It changed all of the things outlined within the spec that changed from the past specs.
+
+- Opened name manager on model_3 and checked all of the names and confirmed that it was all 11 names that were defined within the spec. Then changed S0_in to 2 to see what changed and what didn't. Expectedly, none of the named variables changed at all, neither any of the derivative values on the input pages either. The forward hedge did not change, which is correct behavior, but the money market hedge raised to a value of 6,867,498.52, which is expected since we doubled the American spot conversion by nearly 2. The option hedge also increased accordingly, with a final proceeds of 6,721,847.46. The values are then correctly spanned and updated within the sensitivity check, changing for all 11 scenarios. 
