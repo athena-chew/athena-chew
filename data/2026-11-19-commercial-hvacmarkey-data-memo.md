@@ -8,7 +8,7 @@
 | F0_in     | 1.1756  | Given         | -                          | Given by bank          |
 | F0_CIP    | 1.1300  | Calculated    | -                          | S0 × (1 + R_USD × T/360) / (1 + R_FC × T/360) | 
 | K_PUT     | 1.1164  | S0_in         | -                          | Strikes at spot        |
-| K_CALL    | 1.1641  | S0_in         | -                          | Strikes at spot        |
+| K_CALL    | 1.1164  | S0_in         | -                          | Strikes at spot        |
 | PREM_PUT  | 0.0224  | Given         | -                          | Given by scenario (retail-accessible option quotes are unreliable) |
 | PREM_CALL | 0.0376  | Given         | -                          | Given by scenario (retail-accessible option quotes are unreliable) |
 | FC_AMT    | 3400000 | Given         | -                          | Given by scenario      |
