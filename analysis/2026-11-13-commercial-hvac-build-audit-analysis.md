@@ -19,5 +19,5 @@ Audit Notes
 - After GPT 6 returned model, all methods above were revalidated and proved correct by the same reasons as above. Stepping through the spec, this model was now missing the call tab, opting to leave it out.
 
 - Revised the spec to produce a new model, correcting the call tab missing which now shows up as a tab and uses K_CALL and PREM_CALL correctly. Reverted back to the original coloring scheme as described in 6.1, with yellow text for changable parameters, blue for assumed parameters, black font for calculations and green font for cross-tab.
-- 
+
 - Opened name manager on model and checked all of the names and confirmed that it was all 11 names that were defined within the spec. Then changed S0_in to 2 to see what changed and what didn't. Expectedly, none of the named variables changed at all, neither any of the derivative values on the input pages either. The forward hedge did not change, which is correct behavior, but the money market hedge raised to a value of 6,867,498.52, which is expected since we doubled the American spot conversion by nearly 2. The option hedge also increased accordingly, with a final proceeds of 6,721,847.46. The values are then correctly spanned and updated within the sensitivity check, changing for all 11 scenarios. 
