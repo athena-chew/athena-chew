@@ -72,9 +72,9 @@ All inputs should be exposed as workbook **named ranges** so Calculation Flow (�
 | `R_USD` | USD interest rate to settlement | Annual % | 3.45% annual, ACT/360 (indicative, replaced with live market data at Stage 4.)| H.15 |
 | `R_FC` | Foreign-currency interest rate to settlement | Annual % | 2.12% annual, ACT/360 (indicative, replaced with live market data at Stage 4.)| ECB |
 | `T_DAYS` | Days to settlement | Days | 273 | Given |
-| `BASIS` | Day-count denominator (single-value simplification) | Days | 360 (USD, EUR) | Given |
-| `K_PUT` | Put option strike (receivables) | USD per FC | 1.1641 - (Strikes at spot) | Given |
-| `K_CALL` | Call option strike (payables) | USD per FC | 1.1641 - (Strikes at spot) | Given |
+| `BASIS` | Day-count denominator (single-value simplification) | Days | 360 (USD, EUR) | Given (Assumption) |
+| `K_PUT` | Put option strike (receivables) | USD per FC | 1.1641 - (Strikes at spot) | Given (Assumption) |
+| `K_CALL` | Call option strike (payables) | USD per FC | 1.1641 - (Strikes at spot) | Given (Assumption) |
 | `PREM_PUT` | Put premium, USD per 1 FC | USD | 0.0224 | Given |
 | `PREM_CALL` | Call premium, USD per 1 FC | USD | 0.0376 | Given |
 
@@ -194,7 +194,7 @@ Record the base-case outcome at `S_T = S0_in` once the model is built. This bloc
 | No hedge | 3957940 | 0 | — |
 | Forward | 3997040 | 0 | + 0.99% |
 | Money market | 3997228 | 0 | + 0.99%|
-| Option (put) | 3881780 | 76160 | -1.92% |
+| Option (put) | 3879787 | 76160 | -1.97% |
 
 ---
 
@@ -267,11 +267,12 @@ The workbook must contain the following tabs, each with a clearly defined purpos
 | Tab | Purpose |
 |---|---|
 | Cover | Identify the project, company, course, author, model version, date, and data-provenance block (placeholders noted as indicative). |
-| Legend/Key | Explain cell colors, input conventions, formulas, and workbook navigation. Yellow fill = inputs · Blue fill = assumptions · Green fill = formulas · Gray fill = outputs, applied throughout |
+| Legend-Key | Explain cell colors, input conventions, formulas, and workbook navigation. |
 | Inputs | Store all market inputs, assumptions, units, sources, and access dates. |
 | Forward Hedge | Calculate the locked-in USD proceeds using the forward exchange rate. |
 | Money-Market Hedge | Display the foreign-currency borrowing, spot conversion, and USD investment calculations separately. |
 | Option Hedge | Calculate the put option payoff, premium cost, and net USD proceeds. |
+| Payable Variant | Calculate the call option payoff, premium cost, and net USD loss. |
 | Sensitivity | Compare all four strategies across the specified future exchange-rate scenarios. |
 | Notes & Assumptions | Document data sources, market-data timestamps, assumptions, limitations, and model conventions.
 
