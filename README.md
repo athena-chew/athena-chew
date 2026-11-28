@@ -9,11 +9,13 @@ Outside of my professional interests, I enjoy going to the beach, shopping, expl
 # Engagements
 
 [Resume](RESUME.md)
-[Brief](docs/briefs/2026-10-23-commercial-hvac-hedge-brief.md)
-[Spec](capabilities/fx-hedging/spec.md)
-[Model](capabilities/fx-hedging/model.xlsx)
-[Build Audit](analysis/figures/2026-11-13-commercial-hvac-build-audit-analysis.md)
-[Data Memo](data/2026-11-19-commercial-hvac-market-data-memo.md)
-[Validation Analysis](analysis/figures/2026-11-27-commercial-hvac-validation-analysis.md)
-[Decision Memo](decisions/2026-11-27-commercial-hvac-hedge-decision-memo.md)
-[Prompt Log](prompt-log.md)
+
+#Commercial HVAC Project
+- [Brief](docs/briefs/2026-10-23-commercial-hvac-hedge-brief.md)
+- [Spec](capabilities/fx-hedging/spec.md)
+- [Model](capabilities/fx-hedging/model.xlsx)
+- [Build Audit](analysis/figures/2026-11-13-commercial-hvac-build-audit-analysis.md)
+- [Data Memo](data/2026-11-19-commercial-hvac-market-data-memo.md)
+- [Validation Analysis](analysis/figures/2026-11-27-commercial-hvac-validation-analysis.md)
+- [Decision Memo](decisions/2026-11-27-commercial-hvac-hedge-decision-memo.md)
+- [Prompt Log](prompt-log.md)
