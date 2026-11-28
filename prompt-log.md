@@ -41,3 +41,16 @@ Validation shows 35 PASS and 1 FAIL out of 36 checks.
 
 - **What was wrong and how it was caught:** Legend contradicted the formatting. It said “Green text = formula calculated on this tab”, but the cells use black for same-tab formulas and green for cross-tab links. I caught it by comparing the legend text with the actual font colours cell by cell. The corrected file fixes the legend. The original also tracked forward points, which were omitted in the second. The parity check fails by 3.83% (about $153k), and that comes from the inputs rather than the formulas. The bank forward of 1.1756 is far above the covered-interest-parity forward of 1.1305. The workbook’s own parity check and the Validation tab flag it. The workbook leaves F0_in unchanged, documents the gap and recommends requesting a requote.
 The tab is “Legend-Key” because Excel doesn’t allow “/” in sheet names.
+
+# 2026-11-27
+
+- **Asked:** (1) Compute all hedge outcomes for the Stage 4 live market data (€3.4M, 273 days) from the spec and the 2026-11-19 memo, and recommend a strategy. (2) Add a table of the call values.
+
+- **Produced:** A summary table of no hedge, forward, money market and at-the-money put outcomes at S_T = S₀. A −5% to +5% sensitivity grid with breakeven rates. A recommendation to take the 1.1756 bank forward only if the bank confirms the quote is firm, and otherwise to use the money-market hedge. A second table of call-option outlays for the payable variant, with the same grid, a $3,928,021 ceiling and breakevens. No files were created.
+
+- **What was wrong and how it was caught:** The spec file wasn't in context, only the memo, so I read it from the upload folder before computing anything.
+The memo's $155,040 forward-vs-money-market gap comes from rounding the CIP forward to 1.1300. The exact figure is $154,811, which matches the workbook and lab.
+The lab's put result ($3,719,600) differs from the workbook's ($3,716,966) because the lab uses the premium at face value. The spec uses the future value of the premium, so the workbook is correct.
+The 1.1756 bank forward is about 4% above the CIP-fair 1.1301. I traced it to the original indicative inputs (S0 = 1.1641), so it looks stale against the live spot. This is my inference, not something the bank confirmed, so the forward recommendation is conditional.
+A web search found one source consistent with the 1.1164 spot on Nov 10. It also showed EUR/USD around 1.10 by Nov 17–20, so all of these figures are about 1.5% out of date and should be repriced before execution.
+You didn't say whether the call table was for a receivable or a payable. I assumed a payable, the case where a call applies, and stated that. For a payable the 1.1756 forward is worse than the money-market hedge by $154,811, which reverses the forward recommendation from the receivable case.
