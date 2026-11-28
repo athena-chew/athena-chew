@@ -21,6 +21,27 @@
 - Difference from rate F0_in: -0.0456
 - Difference from forward hedge payable: 155040 USD
 
+**Workbook results** 
+|        Name         |    Value   | 
+|---------------------|------------|
+| Unhedged            | $3,795,760 |
+| Forward hedge       | $3,997,040 |
+| Money Market hedge  | $3,842,229 |
+| Put hedge           | $3,719,600 |
+| Implied forward     | 1.1301     |
+| Bank quoted forward | 1.1756     |
+
+**Lab results (S_T = S_0)**
+|        Name         |    Value   | 
+|---------------------|------------|
+| Unhedged            | $3,795,760 |
+| Forward hedge       | $3,997,040 |
+| Money Market hedge  | $3,842,229 |
+| Put hedge           | $3,719,600 |
+| Implied forward     | 1.1301     |
+| Bank quoted forward | 1.1756     |
+
+
 **Workbook checks**
 
 10 of the 12 validations were correct and the table was repopulated correctly using the new data. All the data within the sensitivity graph was compared to the FX hedging lab calculator, and all values correctly matched. The only validations that weren't correct were the EUR borrowing fully repaid validation and the parity within 0.05% validation. The EUR borrowing was solely because the formula was selecting B13 of the money market hedge tab, which corresponded to the completed check, and then subtracting from the original receivable. This step already does this check, so adding the extra subtraction made the check incorrect. Instead, I changed the formula so that it would just take the final check at face value.
