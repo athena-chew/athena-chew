@@ -92,11 +92,13 @@ USD Proceeds(+2) = MAX(S_T, K_PUT) * FC_AMT + FV_PREM_PUT = MAX(1.1387, 1.1164) 
 | S_0 = +2%   | 3871675  | 3997040       | 3842229  | 3792882    |
 
 **Spec Retrospective** 
+
 Throughout the creation and revision of the specification and the model, the LLM had a few things that it constantly got wrong. For one, the premiums did not match the 5.1 validation. This was because there was varying information on the premiums and whether they should be calculated with the interest or at face value. This ultimately became a decision, which the former was chosen. Having this explicitly within the spec could help to reduce this confusion. Also, the callable model was changed constantly, going from first being included, then removed, then reincluded. This is because there was not a need for a payable version since the scenario specifically included a receivable, but it was later decided that it would be kept to showcase the what if model, also because the call rates were provided. Making this clear from the Stage 1 memo would have made this much clearer when creating the spec. In addition, choosing the right values for the spec we're confusing me as I did not have clear what I should put to be able to validate the table. I did not realize I could use the lab's numbers for validation at first. This caused the model to create a correct but contradicting workbook as the checks it set out to have came back incorrect even though it was just the data. This could be solved by better instruction regarding checking the inputs beforehand and making sure they compute correctly before creating anything. 
 
 Finally, the validation was also giving me issues, as sometimes it created anywhere between 10-30 validation checks. Some were more in depth than others, some just scratched the surface and missed some important checks, such as whether values were missing, or if some of the sensitivity values calculated correctly. This is most likely a result that occurs because the spec is too vague and describes confirming over all values and equations, but not explicitly stating them. This ambiguity causes it to choose it's own validations. In a revised spec, I would specifically define all of the validations I need for each cell so that it can explicitly have a specific number of checks and their expected result. 
 
 **Appendix A - Raw LLM response**
+
 I'll start by reading the spec, since only the memo is in my context.
 
 **Recommendation: lock in the bank forward at 1.1756, but only after confirming the quote is real and firm. If it isn't, use the money-market hedge.**
