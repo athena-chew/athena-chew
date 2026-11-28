@@ -38,6 +38,7 @@ All values match correctly between the fresh LLM and the workbook's values. LLM 
 Calculated by hand
 
 **Unhedged**
+
 USD Proceeds(-2) = F_AMT * S_T = 3400000 * 1.0940 = 3719845 - For S_T = -2% S_0
 
 USD Proceeds(-1) = F_AMT * S_T = 3400000 * 1.1052 = 3757802 - For S_T = -1% S_0
@@ -49,11 +50,13 @@ USD Proceeds(+1) = F_AMT * S_T = 3400000 * 1.1276 = 3833718 - For S_T = +1% S_0
 USD Proceeds(+2) = F_AMT * S_T = 3400000 * 1.1387 = 3871675 - For S_T = +2% S_0
 
 **Forward Hedge**
+
 USD Proceeds = F_AMT * F0_in = 3,400,000 * 1.1756 = $3,997,040
 
 Forward hedge is locked in across all sensitivity, so this number spans across the whole table.
 
 **Money Market Hedge**
+
 Borrow FC, Convert at spot, Invest in USD
 
 Borrow = FC_AMT / (1 + R_FC * T_DAYS/360) = 3400000 / (1 + 0.0291 * 273/360) = 3326590.46
@@ -65,6 +68,7 @@ USD Proceeds = USD_now * (1 + R_USD * T_DAYS/360) = 3713805.60 * (1 + 0.0456 * 2
 Money Market is locked in across all sensitivity, so this number spans across the whole table.
 
 **Put Option**
+
 DF_USD = 1 + R_USD * T_DAYS / BASIS = 1 + 0.0456 * 273/360 = 1.03458
 
 FV_PREM_PUT = −PREM_PUT * FC_AMT * DF_USD = -0.0224 * 3400000 * 1.03458 = -78793.61
