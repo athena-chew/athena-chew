@@ -21,13 +21,13 @@
 - Difference from rate F0_in: -0.0456
 - Difference from forward hedge payable: 155040 USD
 
-**Workbook results** 
+**Workbook results (S_T = S_0)** 
 |        Name         |    Value   | 
 |---------------------|------------|
 | Unhedged            | $3,795,760 |
 | Forward hedge       | $3,997,040 |
 | Money Market hedge  | $3,842,229 |
-| Put hedge           | $3,719,600 |
+| Put hedge           | $3,716,966 |
 | Implied forward     | 1.1301     |
 | Bank quoted forward | 1.1756     |
 
@@ -44,8 +44,7 @@
 
 **Workbook checks**
 
-10 of the 12 validations were correct and the table was repopulated correctly using the new data. All the data within the sensitivity graph was compared to the FX hedging lab calculator, and all values correctly matched. The only validations that weren't correct were the EUR borrowing fully repaid validation and the parity within 0.05% validation. The EUR borrowing was solely because the formula was selecting B13 of the money market hedge tab, which corresponded to the completed check, and then subtracting from the original receivable. This step already does this check, so adding the extra subtraction made the check incorrect. Instead, I changed the formula so that it would just take the final check at face value.
+24 out of 29 validations were correct and the table was repopulated correctly using the new data. All the data within the sensitivity graph was compared to the FX hedging lab calculator, and all values correctly matched (S_T = S_0) modeled here. The only validations that weren't correct were the parity check and 4 of the base case validations against 5.1. The latter is to be expected because the workbook inputs were changed to the live market values. They no longer match the base case values and therefore the check fails. It is not a result of the workbook failing, just a sign that the data was changed. 
 
-For the parity check, the relative distance between the money market and the forward hedge was 3.87%, calculated in B21 of Money Market Hedge. This is much higher than the accepted threshold of 0.05%, which the parity check correctly flags. Calculating the forward hedge and the money market hedge manually gives a difference of 154,811.01, a percentage difference of 3.87%, which are both correctly calculated in the workbook. This suggests not an issue with the workbook itself, but with the bank proposed forward hedge. This works to our benefit, as the quote would receive more money than the money market hedge. 
-
+For the parity check, the relative distance between the money market and the forward hedge was 3.87%, calculated in B21 of Money Market Hedge. This is much higher than the accepted threshold of 0.05%, which the parity check correctly flags. Calculating the forward hedge and the money market hedge manually gives a difference of 154,811.01, a percentage difference of 3.87%, which are both correctly calculated in the workbook. This is correctly reflected in the lab, which cites a difference of $154,811, the same as the hand calculated data. This suggests not an issue with the workbook itself, but with the bank proposed forward hedge. This works to our benefit, as the quote would receive more money than the money market hedge. 
 
