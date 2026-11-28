@@ -17,5 +17,5 @@ Outside of my professional interests, I enjoy going to the beach, shopping, expl
 - [Build Audit](analysis/figures/2026-11-13-commercial-hvac-build-audit-analysis.md)
 - [Data Memo](data/2026-11-19-commercial-hvac-market-data-memo.md)
 - [Validation Analysis](analysis/figures/2026-11-27-commercial-hvac-validation-analysis.md)
-- [Decision Memo](decisions/2026-11-27-commercial-hvac-hedge-decision-memo.md)
+- [Decision Memo](docs/decisions/2026-11-27-commercial-hvac-hedge-decision-memo.md)
 - [Prompt Log](prompt-log.md)
