@@ -10,7 +10,7 @@ Outside of my professional interests, I enjoy going to the beach, shopping, expl
 
 [Resume](RESUME.md)
 
-#Commercial HVAC Project
+# Commercial HVAC Project
 - [Brief](docs/briefs/2026-10-23-commercial-hvac-hedge-brief.md)
 - [Spec](capabilities/fx-hedging/spec.md)
 - [Model](capabilities/fx-hedging/model.xlsx)
